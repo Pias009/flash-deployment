@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "dev": "nodemon --env-file=.env.local server.js",
+    "start": "node index.js",
+    "dev": "nodemon --env-file=.env.local index.js",
+    "vercel-build": "echo 'No build step required'",
     "build": "vite build",
     "build:dev": "vite build --mode development"
   },

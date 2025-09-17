@@ -4,17 +4,30 @@ const News = require('../models/News');
 const multer = require('multer');
 const path = require('path');
 
-// Set up multer for file uploads
+// Set up multer for file uploads with error handling
 const storage = multer.diskStorage({
-  destination: './uploads/',
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
   filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
 
+// Use memory storage for Vercel compatibility
+const memoryStorage = multer.memoryStorage();
+
 const upload = multer({
-  storage: storage,
-  limits:{fileSize: 1000000},
+  storage: process.env.VERCEL ? memoryStorage : storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: function(req, file, cb) {
+    // Accept only image files
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'), false);
+    }
+  }
 }).single('image');
 
 // Create a news article
