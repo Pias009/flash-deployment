@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Cross, ArrowRight, Zap, Shield, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import logo from '../assets/logo.png';
+import logo from '@/assets/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
