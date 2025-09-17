@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Cross, ArrowRight, Zap, Shield, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import logo from '@/assets/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,15 +99,6 @@ const HeroSection = () => {
     >
       <div className="container max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
         <div className="flex flex-col justify-center items-center text-center space-y-6 sm:space-y-10 min-h-[80vh] max-w-5xl mx-auto">
-          <motion.img
-            src={logo}
-            alt="logo"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="w-24 h-24 sm:w-40 sm:h-40 mb-2"
-          />
-
           <h1
             className="heading relative inline-block text-3xl sm:text-5xl md:text-6xl font-extrabold leading-snug sm:leading-tight tracking-tight bg-gradient-to-r from-[#fcffe7] via-[#1e3a8a] to-[#00bfff] bg-clip-text text-transparent"
             style={{
