@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import logo from '@/assets/logo.png';
 
 
 const Navigation = () => {
@@ -47,17 +46,6 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="relative"
-            >
-              <img 
-                src={logo} 
-                alt="logo" 
-                className="w-10 h-10 drop-shadow-primary animate-glow-pulse"
-              />
-              <div className="absolute inset-0 bg-gradient-primary opacity-20 rounded-full blur-lg group-hover:opacity-40 transition-opacity"></div>
-            </motion.div>
             <motion.span 
               className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
               whileHover={{ scale: 1.05 }}
