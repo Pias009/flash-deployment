@@ -121,7 +121,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="description text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl">
-            Lightning fast. Fully decentralized. Built for traders and Web3 innovators.
+            Lightning fast. Fully decentralized. Built for traders and Web3 innovators..
           </p>
 
           <div className="action-buttons flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
