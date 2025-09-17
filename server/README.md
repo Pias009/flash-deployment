@@ -51,11 +51,11 @@ vercel --prod
 
 ## API Endpoints
 
-Once deployed, your API will be available at:
-- `https://your-project.vercel.app/api/health` - Health check
-- `https://your-project.vercel.app/api/auth/login` - Authentication
-- `https://your-project.vercel.app/api/news` - News articles
-- `https://your-project.vercel.app/api/admin` - Admin panel (requires auth)
+Your API is now deployed and available at:
+- `https://flash-deployment-25ak.vercel.app/api/health` - Health check
+- `https://flash-deployment-25ak.vercel.app/api/auth/login` - Authentication
+- `https://flash-deployment-25ak.vercel.app/api/news` - News articles
+- `https://flash-deployment-25ak.vercel.app/api/admin` - Admin panel (requires auth)
 
 ## File Structure
 
