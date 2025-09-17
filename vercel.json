@@ -2,8 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/**",
-      "use": "@vercel/static-build"
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      }
     },
     {
       "src": "server/index.js",
@@ -17,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "$1"
+      "dest": "client/index.html"
     }
   ]
 }
