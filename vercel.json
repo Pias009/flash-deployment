@@ -2,11 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/index.html",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/dist"
-      }
+      "src": "client/**",
+      "use": "@vercel/static-build"
     },
     {
       "src": "server/index.js",
@@ -20,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "client/index.html"
+      "dest": "$1"
     }
   ]
 }
