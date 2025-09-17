@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-import logo from '@/assets/logo.png';
-
 const Footer = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
@@ -23,11 +21,6 @@ const Footer = () => {
             className="lg:col-span-2"
           >
             <div className="flex items-center space-x-3 mb-4">
-              <img
-                src={logo}
-                alt="logo"
-                className="w-10 h-10 drop-shadow-primary animate-glow-pulse"
-              />
               <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 FlashCoin
               </span>
