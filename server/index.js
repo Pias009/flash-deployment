@@ -85,7 +85,7 @@ app.use((req, res, next) => {
     return next();
   }
 
-  const indexPath = path.join(__dirname, '..', 'client', 'dist', 'index.html');
+  const indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html');
   const fs = require('fs');
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);

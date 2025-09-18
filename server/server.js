@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 // Catch-all to serve index.html for any unhandled routes
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
