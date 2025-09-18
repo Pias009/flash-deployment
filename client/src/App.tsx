@@ -15,6 +15,7 @@ import Admin from "./pages/Admin/Adminpnael";
 import TermsAndConditions from "./pages/Condition";
 import Login from "./pages/Login";
 
+// Initialize QueryClient for React Query
 const queryClient = new QueryClient();
 
 const App = () => (
