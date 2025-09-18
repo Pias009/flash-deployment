@@ -46,12 +46,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <motion.span 
-              className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
-              whileHover={{ scale: 1.05 }}
-            >
-              Flash
-            </motion.span>
+            <img src="/src/assets/logo.png" alt="Flash Logo" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

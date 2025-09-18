@@ -92,13 +92,20 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden text-white pt-16 "
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden text-white pt-32 "
       style={{
         backgroundImage: 'linear-gradient(to bottom, #0a1a2f 40%, #000000 100%)',
       }}
     >
       <div className="container max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
         <div className="flex flex-col justify-center items-center text-center space-y-6 sm:space-y-10 min-h-[80vh] max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <img src="/src/assets/logo.png" alt="Flash Logo" className="h-32 sm:h-40 w-auto mx-auto mb-4" />
+          </motion.div>
           <h1
             className="heading relative inline-block text-3xl sm:text-5xl md:text-6xl font-extrabold leading-snug sm:leading-tight tracking-tight bg-gradient-to-r from-[#fcffe7] via-[#1e3a8a] to-[#00bfff] bg-clip-text text-transparent"
             style={{
