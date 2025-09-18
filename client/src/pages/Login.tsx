@@ -28,9 +28,7 @@ const Login = () => {
           title: "Login Successful!",
           description: "Redirecting to admin panel...",
         });
-        setTimeout(() => {
-          navigate('/Rz7');
-        }, 1000); // Redirect after 1 second to allow toast to be seen
+        navigate('/Rz7');
       } else {
         const errorData = await response.json();
         toast({
