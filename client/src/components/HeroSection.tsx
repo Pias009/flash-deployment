@@ -1,5 +1,6 @@
 'use client';
 
+import logo from '/src/assets/logo.png';
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -104,7 +105,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <img src="/src/assets/logo.png" alt="Flash Logo" className="h-32 sm:h-40 w-auto mx-auto mb-4" />
+            <img src={logo} alt="Flash Logo" className="h-32 sm:h-40 w-auto mx-auto mb-4" />
           </motion.div>
           <h1
             className="heading relative inline-block text-3xl sm:text-5xl md:text-6xl font-extrabold leading-snug sm:leading-tight tracking-tight bg-gradient-to-r from-[#fcffe7] via-[#1e3a8a] to-[#00bfff] bg-clip-text text-transparent"

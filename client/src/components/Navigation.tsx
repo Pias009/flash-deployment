@@ -1,3 +1,4 @@
+import logo from '/src/assets/logo.png';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -46,7 +47,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <img src="/src/assets/logo.png" alt="Flash Logo" className="h-8 w-auto" />
+            <img src={logo} alt="Flash Logo" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
