@@ -28,7 +28,7 @@ const Login = () => {
           title: "Login Successful!",
           description: "Redirecting to admin panel...",
         });
-        navigate('/Rz7');
+        navigate('/admin');
       } else {
         const errorData = await response.json();
         toast({
