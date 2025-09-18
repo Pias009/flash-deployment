@@ -1,6 +1,6 @@
 'use client';
 
-import logo from '/src/assets/logo.png';
+import logo from '@/assets/logo.png';
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
