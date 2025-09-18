@@ -27,7 +27,7 @@ const Footer = () => {
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-w-md">
               Convert USD and Cryptos to Flash Coin with Ease – Fast, Secure, and Convenient.
-              Experience seamless digital currency exchange with Flash Coin.
+              Experience seamless digital currency exchange with Flash Coin..
             </p>
           </motion.div>
 
