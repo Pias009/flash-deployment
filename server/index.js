@@ -73,22 +73,24 @@ app.get('/api/health', (req, res) => {
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
-// Catch-all handler for SPA routing - use middleware instead of route
+// Catch-all handler for SPA routing
 app.use((req, res, next) => {
-  // Only serve index.html for non-API routes and if no other route matched
-  if (!req.path.startsWith('/api/') && !res.headersSent) {
-    const indexPath = path.join(__dirname, '..', 'client', 'dist', 'index.html');
-    // Check if file exists before serving
-    const fs = require('fs');
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.status(404).json({ message: 'Frontend not built. Run client build first.' });
-    }
-  } else if (req.path.startsWith('/api/') && !res.headersSent) {
-    res.status(404).json({ message: 'API endpoint not found' });
+  // If the request is for an API route, let it pass to the next middleware (which might be a 404 for API)
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+
+  // If headers have already been sent, do nothing
+  if (res.headersSent) {
+    return next();
+  }
+
+  const indexPath = path.join(__dirname, '..', 'client', 'dist', 'index.html');
+  const fs = require('fs');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
   } else {
-    next();
+    res.status(404).json({ message: 'Frontend not built. Run client build first.' });
   }
 });
 
