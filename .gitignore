@@ -123,13 +123,14 @@ Desktop.ini
 uploads/
 *.jpg
 *.jpeg
-*.png
 *.gif
 *.bmp
 *.tiff
 *.svg
 !public/**/*.svg
 !src/**/*.svg
+*.png
+!client/src/**/*.png
 
 # Database files
 *.db
