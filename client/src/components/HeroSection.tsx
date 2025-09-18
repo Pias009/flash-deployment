@@ -134,7 +134,7 @@ const HeroSection = () => {
                 className="text-sm sm:text-base md:text-lg px-3 py-2 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-2xl border-gray-300 hover:bg-white hover:text-black transition-all flex items-center gap-2"
               >
                 <Cross className="w-4 h-4 sm:w-5 sm:h-5" />
-                SUPPORT TALK
+                SUPPORT TALK.
               </Button>
             </a>
           </div>
