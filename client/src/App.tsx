@@ -14,6 +14,7 @@ import ApiPage from "./pages/Api";
 import Admin from "./pages/Admin/Adminpnael";
 import TermsAndConditions from "./pages/Condition";
 import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
 
 // Initialize QueryClient for React Query
 const queryClient = new QueryClient();
@@ -31,11 +32,16 @@ const App = () => (
           <Route path="/news/:slug" element={<SingleNews />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apk" element={<APK />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/Get API" element={<ApiPage />} />
-          <Route path="/Rz7" element={<Admin/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/condition" element={<TermsAndConditions />} />
+          
+          {/* Protected Routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/Rz7" element={<Admin/>} />
+          </Route>
+          
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

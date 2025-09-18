@@ -42,7 +42,12 @@ const AdminPanel = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/news`, { credentials: 'include' });
       const data = await response.json();
-      setNewsArticles(data);
+      if (Array.isArray(data)) {
+        setNewsArticles(data);
+      } else {
+        console.error('API returned non-array data for news articles:', data);
+        setNewsArticles([]); // Ensure it's always an array
+      }
     } catch (error) {
       console.error('Error fetching news:', error);
     }
