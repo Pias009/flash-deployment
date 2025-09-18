@@ -18,7 +18,7 @@ const PrivateRoute = () => {
 
       try {
         // Verify token with backend
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/admin`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/validate`, {
           credentials: 'include',
           headers: {
             'Authorization': `Bearer ${token}`
