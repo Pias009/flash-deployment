@@ -12,7 +12,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['https://at.neonecy.com', 'https://flash-deployment-25ak.vercel.app', 'https://flashview-hs1k060my-pias009s-projects.vercel.app', 'http://localhost:8080', 'http://localhost:8081', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'],
+  origin: [ 'https://flash-deployment-25ak.vercel.app', 'https://flashview-hs1k060my-pias009s-projects.vercel.app', 'http://localhost:8080', 'http://localhost:8081', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'],
   credentials: true
 }));
 app.use(express.json());
@@ -37,8 +37,6 @@ async function connectToDatabase() {
 
   try {
     const connection = await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
