@@ -114,7 +114,7 @@ const HeroSection = () => {
               transition: 'background-position 1s',
             }}
           >
-            FLASH – The Next-Gen Crypto Power
+            FLASH – The Next-Gen Crypto Power.
           </h1>
 
           <p className="description text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl">
