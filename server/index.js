@@ -12,8 +12,21 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [ 'https://flash-deployment-25ak.vercel.app', 'https://flashview-hs1k060my-pias009s-projects.vercel.app', 'http://localhost:8080', 'http://localhost:8081', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081', 'http://localhost:5173'],
-  credentials: true
+  origin: [
+    'https://at.neonecy.com',
+    'https://flash-deployment-25ak.vercel.app',
+    'https://flashview-hs1k060my-pias009s-projects.vercel.app',
+    'https://flashview-nz84u33qc-pias009s-projects.vercel.app',
+    /^https:\/\/.*\.vercel\.app$/,
+    'http://localhost:8080',
+    'http://localhost:8081',
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8081',
+    'http://localhost:5173'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 app.use(express.json());
 app.use(cookieParser());
