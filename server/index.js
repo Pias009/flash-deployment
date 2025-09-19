@@ -2,32 +2,32 @@ require('dotenv').config({ path: '.env.local' });
 
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const authMiddleware = require('./middleware/authMiddleware');
 
 const app = express();
 
 // Middleware
-const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-ih1obut3h-neonecys-projects.vercel.app']; // Default for local dev if not set
+app.use(express.json());
+app.use(cookieParser());
+
+// CORS configuration
+const allowedOrigins = ['https://flashview-six.vercel.app'];
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
-    return callback(null, true);
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
-app.use(express.json());
-app.use(cookieParser());
 
 // Request logging middleware
 app.use((req, res, next) => {

@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const authMiddleware = require('./middleware/authMiddleware');
 
@@ -20,6 +21,21 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// CORS configuration
+const allowedOrigins = ['https://flashview-six.vercel.app'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI);
