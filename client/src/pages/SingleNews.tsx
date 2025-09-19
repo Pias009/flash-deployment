@@ -22,7 +22,7 @@ const SingleNews = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`https://srv-theta.vercel.app/api/news/${slug}`); // Directly use the backend URL
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/news/${slug}`);
         const data = await response.json();
         setArticle(data);
         document.title = `${data.title} - FlashCoin News`;
@@ -61,7 +61,7 @@ const SingleNews = () => {
       <section className="py-20 bg-gradient-dark">
         <div className="container mx-auto px-6">
           <Card className="p-6 bg-gradient-to-br from-card to-card/50 border border-border/20">
-            <img src={`${import.meta.env.VITE_BASE_URL}${article.image}`} alt={article.title} className="w-full h-96 object-contain mb-8" />
+            <img src={`${import.meta.env.VITE_API_URL}${article.image}`} alt={article.title} className="w-full h-96 object-contain mb-8" />
             <div
               className="prose prose-invert max-w-none text-left"
               dangerouslySetInnerHTML={{ __html: article.content }}
