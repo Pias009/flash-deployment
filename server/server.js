@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['http://localhost:8080', 'http://localhost:8081'];
+const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['http://localhost:8080', 'https://viewwwwww-447ju9oxf-neonecys-projects.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
