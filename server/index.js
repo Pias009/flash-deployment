@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const authMiddleware = require('./middleware/authMiddleware');
 
@@ -46,6 +47,7 @@ async function connectToDatabase() {
   }
 
   try {
+    console.log('Attempting to connect to MONGO_URI:', process.env.MONGO_URI);
     const connection = await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
