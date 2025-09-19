@@ -13,7 +13,7 @@ The frontend is configured with the following environment files:
 
 ### API Endpoints
 The frontend connects to the deployed backend at:
-- **Production API**: `https://flash-deployment-25ak.vercel.app/api`
+- **Production API**: `https://fserver-six.vercel.app/api`
 
 ## Deployment Steps
 
