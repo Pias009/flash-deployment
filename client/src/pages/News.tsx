@@ -31,7 +31,7 @@ const News = () => {
     document.title = 'FlashCoin - Latest News & Updates';
     const fetchNews = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/news`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/news`);
         const data = await response.json();
         setNewsArticles(data);
       } catch (error) {
@@ -84,7 +84,7 @@ const News = () => {
                 >
                   <Card className="overflow-hidden border border-border/20 hover:border-primary/40">
                     <img
-                      src={`${import.meta.env.VITE_BASE_URL}${article.image}`}
+                      src={`${import.meta.env.VITE_API_URL}${article.image}`}
                       alt={article.title}
                       className="w-full h-48 object-cover"
                     />
