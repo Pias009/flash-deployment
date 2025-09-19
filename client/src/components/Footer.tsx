@@ -58,7 +58,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-base font-semibold text-foreground mb-4">Features</h4>
+            <h4 className="text-base font-semibold text-foreground mb-4">Features.</h4>
             <ul className="space-y-2 text-muted-foreground text-sm">
               {['Instant Conversions', 'Low Fees', '24/7 Access', 'Advanced Security'].map((item) => (
                 <li key={item} className="flex items-center space-x-2">
