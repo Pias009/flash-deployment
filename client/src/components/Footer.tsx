@@ -82,7 +82,7 @@ const Footer = () => {
               © 2024 FlashCoin. All rights reserved. 
             </p>
             <div className="flex space-x-4 text-xs text-muted-foreground">
-              <Link to="/condition" className="hover:text-primary transition-colors">Terms of Service</Link>
+              <Link to="/condition" className="hover:text-primary transition-colors">Terms of Service.</Link>
               <Link to="https://t.me/flashersupportx" className="hover:text-primary transition-colors">Support</Link>
             </div>
           </div>
