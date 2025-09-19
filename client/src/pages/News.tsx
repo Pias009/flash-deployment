@@ -31,7 +31,7 @@ const News = () => {
     document.title = 'FlashCoin - Latest News & Updates';
     const fetchNews = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/news`);
+        const response = await fetch('https://srv-theta.vercel.app/api/news'); // Directly use the backend URL
         const data = await response.json();
         setNewsArticles(data);
       } catch (error) {

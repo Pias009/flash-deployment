@@ -22,7 +22,7 @@ const SingleNews = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/news/${slug}`);
+        const response = await fetch(`https://srv-theta.vercel.app/api/news/${slug}`); // Directly use the backend URL
         const data = await response.json();
         setArticle(data);
         document.title = `${data.title} - FlashCoin News`;
