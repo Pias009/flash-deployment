@@ -11,7 +11,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const app = express();
 
 // Middleware
-const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-six.vercel.app/']; // Default for local dev if not set
+const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-ih1obut3h-neonecys-projects.vercel.app']; // Default for local dev if not set
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps or curl requests)
