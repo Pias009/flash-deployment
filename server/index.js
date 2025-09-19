@@ -132,3 +132,10 @@ if (require.main === module) {
     process.exit(1);
   });
 }
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+// Example: Fetching data from the API
+fetch(`${apiUrl}/api/news`)
+  .then(response => response.json())
+  .then(data => console.log(data));
