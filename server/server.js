@@ -2,11 +2,8 @@ require('dotenv').config({ path: '.env.local' });
 
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-
-
 
 const authMiddleware = require('./middleware/authMiddleware');
 
@@ -15,19 +12,6 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-six.vercel.app', 'https://flashview-six.vercel.app/news'];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests from the default frontend domain and specific pages
-    if (!origin || allowedOrigins.some(allowedOrigin => origin.startsWith(allowedOrigin))) {
-      return callback(null, true);
-    }
-    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-    return callback(new Error(msg), false);
-  },
-  credentials: true,
-}));
 app.use(express.json());
 app.use(cookieParser());
 
