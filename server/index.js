@@ -13,16 +13,7 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: [
-    'https://at.neonecy.com',
-    'https://flash-deployment-25ak.vercel.app',
-    'https://flashview-hs1k060my-pias009s-projects.vercel.app',
-    'https://flashview-nz84u33qc-pias009s-projects.vercel.app',
-    /^https:\/\/.*\.vercel\.app$/,
-    'http://localhost:8080',
-    'http://localhost:8081',
-    'http://127.0.0.1:8080',
-    'http://127.0.0.1:8081',
-    'http://localhost:5173'
+    ...(process.env.CORS_ALLOWED_ORIGINS ? ['https://viewwwwww-cmew9k278-neonecys-projects.vercel.app'] : [])
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
