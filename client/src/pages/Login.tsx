@@ -53,6 +53,7 @@ const Login = () => {
         <h2>Admin Login</h2>
         <input
           type="email"
+          id="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -60,6 +61,7 @@ const Login = () => {
         />
         <input
           type="password"
+          id="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
