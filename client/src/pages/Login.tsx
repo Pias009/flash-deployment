@@ -58,6 +58,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={{ margin: '10px 0', padding: '10px' }}
+          autocomplete="username"
         />
         <input
           type="password"
@@ -66,6 +67,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={{ margin: '10px 0', padding: '10px' }}
+          autocomplete="current-password"
         />
         <button type="submit" style={{ padding: '10px' }}>Login</button>
       </form>
