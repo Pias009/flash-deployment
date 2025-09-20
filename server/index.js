@@ -17,9 +17,22 @@ app.use(cookieParser());
 
 // CORS configuration
 // const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-six.vercel.app', 'https://flashview-six.vercel.app'];
+const allowedOrigins = [
+  'http://localhost:5173', // For local client development
+  'http://localhost:8080', // For local client development
+  'https://flashview-six.vercel.app',
+  'https://flashview-six.vercel.app/api/auth/login',
+  'https://srv-theta.vercel.app', // Example Vercel client domain
+  'https://flashview-8udumtyi8-neonecys-projects.vercel.app' // Another example Vercel client domain
+];
+
 app.use(cors({
   origin: function (origin, callback) {
-    return callback(null, true);
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

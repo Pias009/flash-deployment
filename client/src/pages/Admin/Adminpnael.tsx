@@ -58,6 +58,7 @@ const AdminPanel = () => {
 
     const formData = new FormData();
     formData.append('title', title);
+    console.log('Content before appending to formData:', content);
     formData.append('content', content);
     if (image) {
       formData.append('image', image);

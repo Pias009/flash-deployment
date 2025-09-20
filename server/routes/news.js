@@ -77,7 +77,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 // Update a news article
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', upload, async (req, res) => {
   try {
     const { title, content } = req.body;
     const updatedNews = await News.findById(req.params.id);

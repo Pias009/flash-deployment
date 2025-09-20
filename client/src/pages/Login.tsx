@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://srv-theta.vercel.app/api/auth/login`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={{ margin: '10px 0', padding: '10px' }}
-          autocomplete="username"
+         
         />
         <input
           type="password"

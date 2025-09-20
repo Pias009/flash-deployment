@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
 const PrivateRoute = () => {
@@ -8,30 +7,27 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = Cookies.get('token');
-      
-      if (!token) {
-        setIsAuthenticated(false);
-        setIsLoading(false);
-        return;
-      }
-
       try {
+        const validateUrl = `${import.meta.env.VITE_API_URL}/api/auth/validate`;
+        console.log('PrivateRoute: Validating token with URL:', validateUrl);
         // Verify token with backend
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/validate`, {
+        const response = await fetch(validateUrl, {
           credentials: 'include',
         });
 
+        console.log('PrivateRoute: Token validation response status:', response.status);
         if (response.ok) {
           setIsAuthenticated(true);
+          console.log('PrivateRoute: Token validated successfully.');
         } else {
-          // Token is invalid, remove it
-          Cookies.remove('token');
+          // Token is invalid, remove it (if it was present and invalid)
+          // Cookies.remove('token'); // No need to remove if HttpOnly
           setIsAuthenticated(false);
+          console.log('PrivateRoute: Token validation failed, redirecting to login.');
         }
       } catch (error) {
-        console.error('Auth check failed:', error);
-        Cookies.remove('token');
+        console.error('PrivateRoute: Auth check failed (network error or exception):', error);
+        // Cookies.remove('token'); // No need to remove if HttpOnly
         setIsAuthenticated(false);
       } finally {
         setIsLoading(false);
