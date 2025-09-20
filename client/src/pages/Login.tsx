@@ -62,7 +62,7 @@ const Login = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ margin: '10px 0', padding: '10px' }}
+          style={{ margin: '10px 0', padding: '10px', color: 'black' }}
          
         />
         <input
@@ -71,7 +71,7 @@ const Login = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ margin: '10px 0', padding: '10px' }}
+          style={{ margin: '10px 0', padding: '10px', color: 'black' }}
           autoComplete="current-password"
         />
         <button type="submit" style={{ padding: '10px' }}>Login</button>
