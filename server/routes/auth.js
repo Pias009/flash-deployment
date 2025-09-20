@@ -21,8 +21,8 @@ router.post("/login", (req, res) => {
       });
       res.cookie('token', token, {
         httpOnly: true,
-        secure: true, // Explicitly set to true for Vercel deployments (always HTTPS)
-        sameSite: 'None', // Changed from 'Lax' to 'None' for cross-site requests
+        secure: process.env.NODE_ENV === 'production', // Set secure based on environment
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Set sameSite based on environment
         maxAge: 3600000 // 1 hour in milliseconds
       }).json({ message: "Logged in successfully", role: 'admin' });
     } else {

@@ -21,9 +21,8 @@ const allowedOrigins = [
   'http://localhost:5173', // For local client development
   'http://localhost:8080', // For local client development
   'https://flashview-six.vercel.app',
-  'https://flashview-six.vercel.app/api/auth/login',
-  'https://srv-theta.vercel.app', // Example Vercel client domain
-  'https://flashview-8udumtyi8-neonecys-projects.vercel.app' // Another example Vercel client domain
+  'https://flashview-8udumtyi8-neonecys-projects.vercel.app',
+  'https://flashview-o9e43lz25-neonecys-projects.vercel.app' // New client domain
 ];
 
 app.use(cors({

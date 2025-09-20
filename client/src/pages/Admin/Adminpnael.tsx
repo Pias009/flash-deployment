@@ -56,6 +56,16 @@ const AdminPanel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title.trim()) {
+      alert('News title cannot be empty.');
+      return;
+    }
+    // ReactQuill can return '<p><br></p>' for empty content, so check for that too
+    if (!content.trim() || content === '<p><br></p>') {
+      alert('News content cannot be empty.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', title);
     console.log('Content before appending to formData:', content);

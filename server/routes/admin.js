@@ -61,7 +61,7 @@ router.post('/news', authMiddleware, adminOnly, (req, res) => {
         const savedNews = await newNews.save();
         res.status(201).json(savedNews);
       } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message || String(error) });
       }
     }
   });
@@ -92,7 +92,7 @@ router.put('/news/:id', authMiddleware, adminOnly, (req, res) => {
         const savedNews = await updatedNews.save();
         res.json(savedNews);
       } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message || String(error) });
       }
     }
   });
