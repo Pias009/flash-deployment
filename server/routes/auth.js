@@ -19,7 +19,12 @@ router.post("/login", (req, res) => {
       const token = jwt.sign({ email: adminEmail }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-      res.json({ token });
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+        sameSite: 'Lax', // Or 'None' if cross-site requests are expected and secure is true
+        maxAge: 3600000 // 1 hour in milliseconds
+      }).json({ message: "Logged in successfully" });
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }

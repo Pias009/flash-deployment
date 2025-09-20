@@ -22,8 +22,8 @@ const Login = () => {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
-        Cookies.set('token', token);
+        // The server now sets the HttpOnly cookie, no need to extract token from response body
+        // and no need for client-side Cookies.set
         toast({
           title: "Login Successful!",
           description: "Redirecting to admin panel...",
