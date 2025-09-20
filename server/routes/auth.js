@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
       });
       res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+        secure: true, // Explicitly set to true for Vercel deployments (always HTTPS)
         sameSite: 'None', // Changed from 'Lax' to 'None' for cross-site requests
         maxAge: 3600000 // 1 hour in milliseconds
       }).json({ message: "Logged in successfully" });
