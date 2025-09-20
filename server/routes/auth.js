@@ -4,23 +4,28 @@ const authValidation = require("../middleware/authMiddleware");
 
 // User Login
 router.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required." });
-  }
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required." });
+    }
 
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPassword = process.env.ADMIN_PASSWORD;
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
 
-  if (email === adminEmail && password === adminPassword) {
-    // Create a token
-    const token = jwt.sign({ email: adminEmail }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    res.json({ token });
-  } else {
-    res.status(401).json({ message: "Invalid credentials" });
+    if (email === adminEmail && password === adminPassword) {
+      // Create a token
+      const token = jwt.sign({ email: adminEmail }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+      res.json({ token });
+    } else {
+      res.status(401).json({ message: "Invalid credentials" });
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Login failed", error: error.message });
   }
 });
 

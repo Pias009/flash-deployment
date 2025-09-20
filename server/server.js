@@ -56,8 +56,17 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 
 // Catch-all to serve index.html for any unhandled routes
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+app.get(/^\/(?!api\/).*$/, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+});
+
+// Global error handler
+app.use((error, req, res, next) => {
+  console.error('Global error handler:', error);
+  res.status(500).json({
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+  });
 });
 
 app.listen(PORT, () => {

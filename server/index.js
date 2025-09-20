@@ -1,3 +1,4 @@
+
 require('dotenv').config({ path: '.env.local' });
 
 const express = require('express');
@@ -80,24 +81,8 @@ app.get('/api/health', (req, res) => {
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 // Catch-all handler for SPA routing
-app.use((req, res, next) => {
-  // If the request is for an API route, let it pass to the next middleware (which might be a 404 for API)
-  if (req.path.startsWith('/api/')) {
-    return next();
-  }
-
-  // If headers have already been sent, do nothing
-  if (res.headersSent) {
-    return next();
-  }
-
-  const indexPath = path.join(__dirname, '..', 'client', 'public', 'index.html');
-  const fs = require('fs');
-  if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath);
-  } else {
-    res.status(404).json({ message: 'Frontend not built. Run client build first.' });
-  }
+app.get(/^\/(?!api\/).*$/, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
 });
 
 // Global error handler
