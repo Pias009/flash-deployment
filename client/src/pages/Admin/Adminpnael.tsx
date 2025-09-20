@@ -171,7 +171,7 @@ const AdminPanel = () => {
           <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left">Title</th>
+                <th className="text-left">Title,</th>
                 <th className="text-left">Actions</th>
               </tr>
             </thead>
