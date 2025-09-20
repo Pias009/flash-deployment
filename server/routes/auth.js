@@ -22,7 +22,7 @@ router.post("/login", (req, res) => {
       res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        sameSite: 'Lax', // Or 'None' if cross-site requests are expected and secure is true
+        sameSite: 'None', // Changed from 'Lax' to 'None' for cross-site requests
         maxAge: 3600000 // 1 hour in milliseconds
       }).json({ message: "Logged in successfully" });
     } else {
