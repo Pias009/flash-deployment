@@ -2,26 +2,15 @@
 const router = require('express').Router();
 const News = require('../models/News');
 const multer = require('multer');
-const path = require('path');
+const cloudinary = require('cloudinary').v2; // Import Cloudinary
 
-// Set up multer for file uploads with error handling
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb){
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-// Use memory storage for Vercel compatibility
+// Use memory storage for multer
 const memoryStorage = multer.memoryStorage();
 
 const upload = multer({
-  storage: process.env.VERCEL ? memoryStorage : storage,
-  limits: { fileSize: 1000000 },
+  storage: memoryStorage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: function(req, file, cb) {
-    // Accept only image files
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
@@ -34,21 +23,34 @@ const upload = multer({
 router.post('/', (req, res) => {
   upload(req, res, async (err) => {
     if(err){
-      res.status(400).json({ message: err });
-    } else {
-      const slug = req.body.title.toLowerCase().split(' ').join('-');
-      const newNews = new News({
-        title: req.body.title,
-        content: req.body.content,
-        image: req.file ? `/uploads/${req.file.filename}` : null,
-        slug: slug,
-      });
+      return res.status(400).json({ message: err.message });
+    }
+
+    let imageUrl = null;
+    if (req.file) {
       try {
-        const savedNews = await newNews.save();
-        res.status(201).json(savedNews);
-      } catch (error) {
-        res.status(400).json({ message: error.message });
+        const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`, {
+          folder: 'flash_news_images',
+        });
+        imageUrl = result.secure_url;
+      } catch (cloudinaryError) {
+        console.error('Cloudinary upload error:', cloudinaryError);
+        return res.status(500).json({ message: 'Image upload failed' });
       }
+    }
+
+    const slug = req.body.title.toLowerCase().split(' ').join('-');
+    const newNews = new News({
+      title: req.body.title,
+      content: req.body.content,
+      image: imageUrl,
+      slug: slug,
+    });
+    try {
+      const savedNews = await newNews.save();
+      res.status(201).json(savedNews);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
     }
   });
 });
@@ -91,7 +93,15 @@ router.put('/:id', upload, async (req, res) => {
     updatedNews.slug = title ? title.toLowerCase().split(' ').join('-') : updatedNews.slug;
 
     if (req.file) {
-      updatedNews.image = `/uploads/${req.file.filename}`;
+      try {
+        const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`, {
+          folder: 'flash_news_images',
+        });
+        updatedNews.image = result.secure_url;
+      } catch (cloudinaryError) {
+        console.error('Cloudinary upload error:', cloudinaryError);
+        return res.status(500).json({ message: 'Image upload failed' });
+      }
     }
 
     const savedNews = await updatedNews.save();

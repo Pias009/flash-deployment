@@ -5,9 +5,16 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors'); // Added cors import
+const cloudinary = require('cloudinary').v2; // Cloudinary import
 
 const authMiddleware = require('./middleware/authMiddleware');
 
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -20,7 +27,6 @@ app.use((req, res, next) => {
   console.log(`Incoming request: ${req.method} ${req.url} (Path: ${req.path})`);
   next();
 });
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // CORS configuration
 const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['http://localhost:8080']; // Uncommented and will use .env
