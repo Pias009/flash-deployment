@@ -77,29 +77,29 @@ router.get('/:slug', async (req, res) => {
 });
 
 // Update a news article
-// router.put('/:id', upload, async (req, res) => {
-//   try {
-//     const { title, content } = req.body;
-//     const updatedNews = await News.findById(req.params.id);
+router.put('/:id', upload.single('image'), async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const updatedNews = await News.findById(req.params.id);
 
-//     if (!updatedNews) {
-//       return res.status(404).json({ message: 'Cannot find news article' });
-//     }
+    if (!updatedNews) {
+      return res.status(404).json({ message: 'Cannot find news article' });
+    }
 
-//     updatedNews.title = title || updatedNews.title;
-//     updatedNews.content = content || updatedNews.content;
-//     updatedNews.slug = title ? title.toLowerCase().split(' ').join('-') : updatedNews.slug;
+    updatedNews.title = title || updatedNews.title;
+    updatedNews.content = content || updatedNews.content;
+    updatedNews.slug = title ? title.toLowerCase().split(' ').join('-') : updatedNews.slug;
 
-//     if (req.file) {
-//       updatedNews.image = `/uploads/${req.file.filename}`;
-//     }
+    if (req.file) {
+      updatedNews.image = `/uploads/${req.file.filename}`;
+    }
 
-//     const savedNews = await updatedNews.save();
-//     res.json(savedNews);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
+    const savedNews = await updatedNews.save();
+    res.json(savedNews);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 // Delete a news article
 // router.delete('/:id', async (req, res) => {

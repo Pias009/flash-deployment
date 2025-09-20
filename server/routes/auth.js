@@ -16,7 +16,7 @@ router.post("/login", (req, res) => {
 
     if (email === adminEmail && password === adminPassword) {
       // Create a token
-      const token = jwt.sign({ email: adminEmail }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ email: adminEmail, role: 'admin' }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
       res.cookie('token', token, {
@@ -24,7 +24,7 @@ router.post("/login", (req, res) => {
         secure: true, // Explicitly set to true for Vercel deployments (always HTTPS)
         sameSite: 'None', // Changed from 'Lax' to 'None' for cross-site requests
         maxAge: 3600000 // 1 hour in milliseconds
-      }).json({ message: "Logged in successfully" });
+      }).json({ message: "Logged in successfully", role: 'admin' });
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }

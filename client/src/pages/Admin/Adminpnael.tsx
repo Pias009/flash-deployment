@@ -87,10 +87,13 @@ const AdminPanel = () => {
         setEditing(false);
         setEditingId(null);
       } else {
-        console.error('Error saving news article');
+        const errorData = await response.json();
+        console.error('Error saving news article:', errorData);
+        alert(`Error saving news article: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error saving news article:', error);
+      alert('Failed to save news article. Please check the console for details.');
     }
   };
 

@@ -24,11 +24,16 @@ const Login = () => {
       if (response.ok) {
         // The server now sets the HttpOnly cookie, no need to extract token from response body
         // and no need for client-side Cookies.set
+        const responseData = await response.json();
         toast({
           title: "Login Successful!",
-          description: "Redirecting to admin panel...",
+          description: `Redirecting to ${responseData.role === 'admin' ? 'admin panel' : 'homepage'}...`,
         });
-        navigate('/admin');
+        if (responseData.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/'); // Redirect to homepage or any other appropriate route
+        }
       } else {
         const errorData = await response.json();
         toast({
@@ -67,7 +72,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={{ margin: '10px 0', padding: '10px' }}
-          autocomplete="current-password"
+          autoComplete="current-password"
         />
         <button type="submit" style={{ padding: '10px' }}>Login</button>
       </form>
