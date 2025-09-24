@@ -1,13 +1,12 @@
+require("dotenv").config({ path: ".env.local" });
 
-require('dotenv').config({ path: '.env.local' });
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-
-const authMiddleware = require('./middleware/authMiddleware');
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 
@@ -18,25 +17,28 @@ app.use(cookieParser());
 // CORS configuration
 // const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(',') : ['https://flashview-six.vercel.app', 'https://flashview-six.vercel.app'];
 const allowedOrigins = [
-  'http://localhost:5173', // For local client development
-  'http://localhost:8080', // For local client development
-  'https://flashview-six.vercel.app',
-  'https://flashview-8udumtyi8-neonecys-projects.vercel.app',
-  'https://flashview-o9e43lz25-neonecys-projects.vercel.app' // New client domain
+  "http://localhost:5173", // For local client development
+  "http://localhost:8080", // For local client development
+  "https://flashview-six.vercel.app",
+  "https://flashview-8udumtyi8-neonecys-projects.vercel.app",
+  "https://flashview-o9e43lz25-neonecys-projects.vercel.app", // New client domain.
+  "https://flash.neonecy.com", // New client domain
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  })
+);
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -45,7 +47,7 @@ app.use((req, res, next) => {
 });
 
 // Static file serving for uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB Connection with error handling
 let cachedConnection = null;
@@ -56,53 +58,53 @@ async function connectToDatabase() {
   }
 
   try {
-    console.log('Attempting to connect to MONGO_URI:', process.env.MONGO_URI);
+    console.log("Attempting to connect to MONGO_URI:", process.env.MONGO_URI);
     const connection = await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
-    
+
     cachedConnection = connection;
-    console.log('MongoDB database connection established successfully');
+    console.log("MongoDB database connection established successfully");
     return connection;
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error("MongoDB connection error:", error);
     throw error;
   }
 }
 
 // Routes
-const newsRouter = require('./routes/news');
-const authRouter = require('./routes/auth');
-const adminRouter = require('./routes/admin');
+const newsRouter = require("./routes/news");
+const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 
-app.use('/api/news', newsRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/admin', authMiddleware, adminRouter);
+app.use("/api/news", newsRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/admin", authMiddleware, adminRouter);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || "development",
   });
 });
 
 // Serve frontend static files
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
 // Catch-all handler for SPA routing
 app.get(/^\/(?!api\/).*$/, (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, "..", "client", "public", "index.html"));
 });
 
 // Global error handler
 app.use((error, req, res, next) => {
-  console.error('Global error handler:', error);
-  res.status(500).json({ 
-    message: 'Internal server error',
-    error: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+  console.error("Global error handler:", error);
+  res.status(500).json({
+    message: "Internal server error",
+    error: process.env.NODE_ENV === "development" ? error.message : "Something went wrong",
   });
 });
 
@@ -112,10 +114,10 @@ module.exports = async (req, res) => {
     await connectToDatabase();
     return app(req, res);
   } catch (error) {
-    console.error('Database connection failed:', error);
-    return res.status(500).json({ 
-      message: 'Database connection failed',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Service temporarily unavailable'
+    console.error("Database connection failed:", error);
+    return res.status(500).json({
+      message: "Database connection failed",
+      error: process.env.NODE_ENV === "development" ? error.message : "Service temporarily unavailable",
     });
   }
 };
@@ -123,16 +125,15 @@ module.exports = async (req, res) => {
 // For local development
 if (require.main === module) {
   const PORT = process.env.PORT || 5001;
-  
-  connectToDatabase().then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port: ${PORT}`);
+
+  connectToDatabase()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port: ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("Failed to start server:", error);
+      process.exit(1);
     });
-  }).catch((error) => {
-    console.error('Failed to start server:', error);
-    process.exit(1);
-  });
 }
-
-
-
