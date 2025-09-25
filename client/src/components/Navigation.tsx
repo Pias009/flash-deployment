@@ -78,7 +78,7 @@ const Navigation = () => {
           {/* Download Button */}
           <div className="hidden lg:block">
            <a
-  href="/APK/FlashGenerator-2.5.apk"
+  href="/apk/FlashGenerator-2.5.apk"
   download
 >
   <Button 

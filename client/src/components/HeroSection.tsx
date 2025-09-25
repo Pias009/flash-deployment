@@ -124,7 +124,7 @@ const HeroSection = () => {
 
           <div className="action-buttons flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
             <a
-              href="/APK/FlashGenerator-2.5.apk"
+              href="/apk/FlashGenerator-2.5.apk"
               download
               className="text-sm sm:text-base md:text-lg px-3 py-2 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 transition-all flex items-center gap-2"
             >
