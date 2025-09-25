@@ -23,6 +23,7 @@ const allowedOrigins = [
   "https://flashview-8udumtyi8-neonecys-projects.vercel.app",
   "https://flashview-o9e43lz25-neonecys-projects.vercel.app", // New client domain.
   "https://flash.neonecy.com", // New client domain
+  "https://flashcoin.info",
 ];
 
 app.use(
