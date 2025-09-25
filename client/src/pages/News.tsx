@@ -1,21 +1,12 @@
-'use client';
-import { motion } from 'framer-motion';
+"use client";
+import { motion } from "framer-motion";
 
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  Calendar,
-  Clock,
-  ArrowRight,
-  TrendingUp,
-  Globe,
-  Zap,
-} from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Motion configuration
 const fadeUp = {
@@ -28,14 +19,14 @@ const News = () => {
   const [newsArticles, setNewsArticles] = useState([]);
 
   useEffect(() => {
-    document.title = 'FlashCoin - Latest News & Updates';
+    document.title = "FlashCoin - Latest News & Updates";
     const fetchNews = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/news`);
         const data = await response.json();
         setNewsArticles(data);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
 
@@ -51,17 +42,12 @@ const News = () => {
         <div className="container mx-auto px-6">
           <motion.div {...fadeUp} className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Latest News &{' '}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Updates
-              </span>
+              Latest News & <span className="bg-gradient-primary bg-clip-text text-transparent">Updates</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Stay informed with the latest FlashCoin developments, partnerships,
-              security updates, and community news.
+              Stay informed with the latest FlashCoin developments, partnerships, security updates, and
+              community news.
             </p>
-
-          
           </motion.div>
         </div>
       </section>
@@ -71,7 +57,6 @@ const News = () => {
       {/* News Grid */}
       <section className="py-20 bg-gradient-dark">
         <div className="container mx-auto px-6">
-          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsArticles.map((article, index) => (
               <Link to={`/news/${article.slug}`} key={article.slug}>
@@ -83,15 +68,9 @@ const News = () => {
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
                   <Card className="overflow-hidden border border-border/20 hover:border-primary/40">
-                    <img
-                      src={`${import.meta.env.VITE_API_URL}${article.image}`}
-                      alt={article.title}
-                      className="w-full h-48 object-cover"
-                    />
+                    <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold text-foreground line-clamp-2">
-                        {article.title}
-                      </h3>
+                      <h3 className="text-lg font-semibold text-foreground line-clamp-2">{article.title}</h3>
                     </div>
                   </Card>
                 </motion.div>
@@ -110,8 +89,8 @@ const News = () => {
                 Stay Updated with FlashCoin News
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-8">
-                Get the latest updates, security alerts, and important announcements 
-                delivered directly to your inbox.
+                Get the latest updates, security alerts, and important announcements delivered directly to
+                your inbox.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
