@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://srv-theta.vercel.app/api/$1" },
+    { "source": "/admin/(.*)", "destination": "https://srv-theta.vercel.app/admin/$1" },
+    { "source": "/uploads/(.*)", "destination": "https://srv-theta.vercel.app/uploads/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

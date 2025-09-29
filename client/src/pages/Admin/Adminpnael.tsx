@@ -24,7 +24,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const checkAdminAccess = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/admin`, { credentials: 'include' });
+        const response = await fetch(`/admin`, { credentials: 'include' });
         if (response.status === 401 || response.status === 403) {
           navigate('/login'); // Redirect to login page
         }
@@ -40,7 +40,7 @@ const AdminPanel = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/news`, { credentials: 'include' });
+      const response = await fetch(`/api/admin/news`, { credentials: 'include' });
       const data = await response.json();
       if (Array.isArray(data)) {
         setNewsArticles(data);
@@ -77,13 +77,13 @@ const AdminPanel = () => {
     try {
       let response;
       if (editing) {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/news/${editingId}`, {
+        response = await fetch(`/api/admin/news/${editingId}`, {
           method: 'PUT',
           body: formData,
           credentials: 'include'
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/news`, {
+        response = await fetch(`/api/admin/news`, {
           method: 'POST',
           body: formData,
           credentials: 'include'
@@ -118,7 +118,7 @@ const AdminPanel = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/news/${id}`, {
+      const response = await fetch(`/api/admin/news/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
